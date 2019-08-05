@@ -23,6 +23,5 @@ ERC-1808是Cocos-BCX 1808在以太坊上的提案，本项目是基于Cocos-BCX 
   * getChainsCount()  获取支持链的总数
   * getChain(uint256 _chainId)  根据链ID获取链信息
   * isEnableChain(uint256 _chainId) 是否启用了链
-  * 
-
+ 
   
