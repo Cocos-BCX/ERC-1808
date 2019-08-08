@@ -46,6 +46,10 @@ ERC-1808是Cocos-BCX 1808在以太坊上的提案，本项目是基于Cocos-BCX 
     
   * isAuthorizedForAll(address _owner, address _operator) 查询地址是否为其他地址的授权操作
   
-  
+## Unit Tests
+Run `npm install -g truffle` to install [Truffle framework](http://truffleframework.com/docs/getting_started/installation)
+
+Run `truffle test` to run the unit tests.
+
 
 
