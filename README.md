@@ -18,7 +18,7 @@ ERC-1808是Cocos-BCX 1808在以太坊上的提案，本项目是基于Cocos-BCX 
   * isBusinessAdmin(address _businessAdmin)
   * addChain(string memory _chainName) 新增本合约的支持的链（合约）  权限: 业务管理员
   * setChainState(uint256 _chainId, bool _state)  修改合约的支持链（合约）状态  权限: 业务管理员
-  * getChains() public view returns(uint256[] memory chainId,string[] memory chainName, bool[] memory flags)  获取本合约支持的链（合约）
+  * getChains()  获取本合约支持的链（合约）
   * getChainsCount()  获取支持链的总数
   * getChain(uint256 _chainId)  根据链ID获取链信息
   * isEnableChain(uint256 _chainId) 是否启用了链
