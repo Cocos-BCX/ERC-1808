@@ -25,12 +25,12 @@ ERC-1808是Cocos-BCX 1808在以太坊上的提案，本项目是基于Cocos-BCX 
   * isEnableChain(uint256 _chainId) 是否启用了链
  
 * ERC-1808接口
-  * ownerOf(uint256 _tokenId) 查找一个NTF的所有者
-  *将NFT的所有权从一个地址转移到另一个地址，允许附加额外数据; 需验证是否是组合NFT，若组合则不可进行交易
+  * ownerOf(uint256 _tokenId) 查找一个NTF的所有者  
+  将NFT的所有权从一个地址转移到另一个地址，允许附加额外数据; 需验证是否是组合NFT，若组合则不可进行交易
   * safeTransferFromWithExtData(address _from, address _to, uint256 _tokenId, string calldata data) 
-  * safeTransferFrom(address _from, address _to, uint256 _tokenId)
+  * safeTransferFrom(address _from, address _to, uint256 _tokenId)  
     将NFT的所有权从一个地址转移到另一个地址，无附加数据; 需验证是否是组合NFT，若组合则不可进行交易
-  * transferFrom(address _from, address _to, uint256 _tokenId)
+  * transferFrom(address _from, address _to, uint256 _tokenId)  
     转移NFT的所有权：调用方负责确认“收件人”能够接收NFT或其他它们可能永久丢失，因此需要实现调用权限判定以防止滥用
     需验证是否是组合NFT，若组合则不可进行交易
   * balanceOf(address _owner)  返回指定地址账户拥有的NFT数量, _account不可为零地址或者空, 返回值可能为0
