@@ -1,55 +1,55 @@
-# Cocos-BCX 1808 概述
-[COCOS 1808 非同质数字资产标准和世界观系统](https://github.com/Cocos-BCX/1808/blob/master/README.md)
+[中文](https://github.com/Cocos-BCX/ERC-1808/blob/master/README_cn.md)
 
 # ERC-1808
-ERC全称Ethereum Request for Comments，即以太坊开发者提交的协议提案，ERC后面的数字是提案编号。
+[1808 Standard & Multiverse System](https://github.com/Cocos-BCX/1808/blob/master/README.md)
 
-ERC-1808是Cocos-BCX 1808在以太坊上的提案，本项目是基于Cocos-BCX 1808设计理念和提案的一个Demo实现。主要分四个部分：
-* 链
-* ERC-1808接口
-* NFT组合资产
-* 游戏示例
+# ERC-1808
+ERC (Ethereum Request for Comments) is a proposal submitted by the Ethereum developer, and the number after it is the proposal number.
 
-开发者可以调用的合约接口如下所示：
+ERC-1808 is a proposal of Cocos-BCX 1808 on Ethereum. It a Demo implementation proposed based on the design concept of COCOS 1808, which falls into the following four parts:
+* Blockchain
+* ERC-1808 Interface
+* NFT Nested Assets
+* Demo games
 
-* 链
-  * transferSystemAdmin(address _newSystemAdmin) 权限:系统管理员
-  * setBusinessAdmin(address _businessAdmin, bool _changeType)  权限:系统管理员
+The contract interfaces that developers can call are as follows:
+
+* Blockchain
+  * transferSystemAdmin(address _newSystemAdmin) Authority: System Administrator
+  * setBusinessAdmin(address _businessAdmin, bool _changeType)  Authority: System Administrator
   * isBusinessAdmin(address _businessAdmin)
-  * addChain(string memory _chainName) 新增本合约的支持的链（合约）  权限: 业务管理员
-  * setChainState(uint256 _chainId, bool _state)  修改合约的支持链（合约）状态  权限: 业务管理员
-  * getChains()  获取本合约支持的链（合约）
-  * getChainsCount()  获取支持链的总数
-  * getChain(uint256 _chainId)  根据链ID获取链信息
-  * isEnableChain(uint256 _chainId) 是否启用了链
+  * addChain(string memory _chainName) Add a blockchain (contract) supporting the contract Authority: Business Administrator
+  * setChainState(uint256 _chainId, bool _state)  Change the state of blockhcain (contract) supporting the contract Authority: Business Administrator
+  * getChains()  Change the state of blockhcain (contract) supporting the contract Authority: Business Administrator
+  * getChainsCount()  Get the total number of supporting blockchains
+  * getChain(uint256 _chainId)   Get the information of the blockchain based on its ID
+  * isEnableChain(uint256 _chainId) Whether the blockchain is enabled
  
-* ERC-1808接口
-  * ownerOf(uint256 _tokenId) 查找一个NTF的所有者  
-  将NFT的所有权从一个地址转移到另一个地址，允许附加额外数据; 需验证是否是组合NFT，若组合则不可进行交易
+* ERC-1808 Interface
+  * ownerOf(uint256 _tokenId) Find the owner of an NFT  
+  Transfer the ownership of the NFT from one address to another, allowing additional data to be attached; Need to verify whether it is a nested NFT. If it is, it cannot be traded
     
   * safeTransferFromWithExtData(address _from, address _to, uint256 _tokenId, string calldata data) 
     
   * safeTransferFrom(address _from, address _to, uint256 _tokenId)  
-    将NFT的所有权从一个地址转移到另一个地址，无附加数据; 需验证是否是组合NFT，若组合则不可进行交易
+    Transfer the ownership of the NFT from one address to another without any additional data; need to verify whether it is a nested NFT. If it is, it cannot be traded.
       
   * transferFrom(address _from, address _to, uint256 _tokenId)  
-    转移NFT的所有权：调用方负责确认“收件人”能够接收NFT或其他它们可能永久丢失，因此需要实现调用权限判定以防止滥用
-    需验证是否是组合NFT，若组合则不可进行交易
+    Transfer the ownership of the NFT: The caller is responsible for confirming that the “recipient” can receive the NFT or other assets that may be permanently lost otherwise, so it is necessary to implement call permission judgment to prevent abuse. 
+    It is necessary to verify whether it is a nested NFT. If it is, it cannot be traded
       
-  * balanceOf(address _owner)  返回指定地址账户拥有的NFT数量, _account不可为零地址或者空, 返回值可能为0
+  * balanceOf(address _owner)  Return the number of NFTs owned by the specified address account. _account cannot be zero address or empty. The return value may be 0
     
-  * authorize(address _authorized, uint256 _tokenId) 更改或重设NFT的授权地址 零地址表示没有授权的地址
+  * authorize(address _authorized, uint256 _tokenId) Change or reset the NFT's authorized address. Zero address means no authorized address.
     
-  * setAuthorizedForAll(address _operator, bool _authorized) 启用或禁用第三方（“操作授权”）管理的授权所有消息来源的资产
+  * setAuthorizedForAll(address _operator, bool _authorized) Enable or disable assets authorizing all sources that are managed by third-party ("Operation Authorization")
     
-  * getAuthorized(uint256 _tokenId) 获取单个NFT的授权地址
+  * getAuthorized(uint256 _tokenId) Get an authorized address for a single NFT
     
-  * isAuthorizedForAll(address _owner, address _operator) 查询地址是否为其他地址的授权操作
+  * isAuthorizedForAll(address _owner, address _operator) Query whether the address is an authorized operation of another address
   
 ## Unit Tests
 Run `npm install -g truffle` to install [Truffle framework](http://truffleframework.com/docs/getting_started/installation)
 
 Run `truffle test` to run the unit tests.
-
-
 
