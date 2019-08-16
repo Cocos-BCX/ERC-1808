@@ -37,163 +37,162 @@ contract AccessAdmin1 {
     }
 }
 
-contract MyGameData1 is AccessAdmin1, IRCGame {
+contract MyNFTData1 is AccessAdmin1, IRCNFT {
 
-    struct Game {
-        string gameName;
+    struct NFT {
+        string nftName;
         uint256 extAttrCount; /// 扩展属性个数
         bool state;
     }
     
-    mapping(uint256 => Game) gameIdToGame;
-    Game[] public gameArray;
-    mapping(uint256 => mapping(uint256 =>string[])) gameIdToTokenAttr;
+    mapping(uint256 => NFT) nftIdToNFT;
+    NFT[] public nftArray;
+    mapping(uint256 => mapping(uint256 =>string[])) nftIdToTokenAttr;
 
-    event AddGame(address indexed addAddress, uint256 indexed gameId, string gameName);
-    event ChangeGameState(address indexed businessAddress, uint256 indexed gameId, bool indexed state);
-    event ChangeGameExtAttrCount(address indexed businessAddress, uint256 indexed gameId, uint256 indexed extAttrCount);
-    event ChangeTokenExtAttr(address indexed businessAddress,uint256 indexed gameId, uint256 indexed tokenId, uint256 index, string extData );
-    event ChangeTokenExtAttrs(address indexed businessAddress,uint256 indexed gameId, uint256 indexed tokenId, string[] extDatas );
+    event AddNFT(address indexed addAddress, uint256 indexed nftId, string nftName);
+    event ChangeNFTState(address indexed businessAddress, uint256 indexed nftId, bool indexed state);
+    event ChangeNFTExtAttrCount(address indexed businessAddress, uint256 indexed nftId, uint256 indexed extAttrCount);
+    event ChangeTokenExtAttr(address indexed businessAddress,uint256 indexed nftId, uint256 indexed tokenId, uint256 index, string extData );
+    event ChangeTokenExtAttrs(address indexed businessAddress,uint256 indexed nftId, uint256 indexed tokenId, string[] extDatas );
    
-    modifier isValidGameId(uint256 _gameId) {
-        require(_gameId >= 1 && _gameId <= gameArray.length, "");
+    modifier isValidNFTId(uint256 _nftId) {
+        require(_nftId >= 1 && _nftId <= nftArray.length, "");
         _;
     }
 
-    function addGame(string memory _gameName, uint256 _extAttrCount) public onlyBusinessAdmin {
-        require(bytes(_gameName).length > 0,"");
-        require(bytes(_gameName).length <= 32,"");
-        uint256 newGameId = gameArray.length + 1;
-        require(newGameId < 4294967296 && newGameId > 0, "");
-        gameArray.length += 1;
-        Game storage game = gameArray[newGameId - 1];
-        game.gameName = _gameName;
-        game.extAttrCount = _extAttrCount;
-        game.state = true;
-        gameIdToGame[newGameId] = game;
-        emit AddGame(msg.sender, newGameId, _gameName);
+    function addNFT(string memory _nftName, uint256 _extAttrCount) public onlyBusinessAdmin {
+        require(bytes(_nftName).length > 0,"");
+        require(bytes(_nftName).length <= 32,"");
+        uint256 newNFTId = nftArray.length + 1;
+        require(newNFTId < 4294967296 && newNFTId > 0, "");
+        nftArray.length += 1;
+        NFT storage nft = nftArray[newNFTId - 1];
+        nft.nftName = _nftName;
+        nft.extAttrCount = _extAttrCount;
+        nft.state = true;
+        nftIdToNFT[newNFTId] = nft;
+        emit AddNFT(msg.sender, newNFTId, _nftName);
     }
 
-    function setGameState(uint256 _gameId, bool _state) public isValidGameId(_gameId) onlyBusinessAdmin {
-        // uint256 length = gameArray.length;
-        // require(_gameId - 1 < length && _gameId > 0, "");
-        Game storage _game = gameArray[_gameId - 1];
-        require(_state != _game.state, "");
-        _game.state = _state;
-        emit ChangeGameState(msg.sender, _gameId, _state);
+    function setNFTState(uint256 _nftId, bool _state) public isValidNFTId(_nftId) onlyBusinessAdmin {
+        // uint256 length = nftArray.length;
+        // require(_nftId - 1 < length && _nftId > 0, "");
+        NFT storage _nft = nftArray[_nftId - 1];
+        require(_state != _nft.state, "");
+        _nft.state = _state;
+        emit ChangeNFTState(msg.sender, _nftId, _state);
     }
     
-    function setGameExtAttrCount(uint256 _gameId, uint256 _extAttrCount) public isValidGameId(_gameId) onlyBusinessAdmin {
-        Game storage _game = gameArray[_gameId - 1];
-        require(_extAttrCount > _game.extAttrCount, "");
-        _game.extAttrCount = _extAttrCount;
-        emit ChangeGameExtAttrCount(msg.sender, _gameId, _extAttrCount);
+    function setNFTExtAttrCount(uint256 _nftId, uint256 _extAttrCount) public isValidNFTId(_nftId) onlyBusinessAdmin {
+        NFT storage _nft = nftArray[_nftId - 1];
+        require(_extAttrCount > _nft.extAttrCount, "");
+        _nft.extAttrCount = _extAttrCount;
+        emit ChangeNFTExtAttrCount(msg.sender, _nftId, _extAttrCount);
     }
 
-    function getGames() public view returns(uint256[] memory gameId,string[] memory gameName, bool[] memory flags) {
-        uint256 gameLength = gameArray.length;
-        gameId = new uint256[](gameLength);
-        flags = new bool[](gameLength);
-        gameName = new string[](gameLength);
-        for (uint256 i = 0; i < gameLength; ++i) {
+    function getNFTs() public view returns(uint256[] memory nftId,string[] memory nftName, bool[] memory flags) {
+        uint256 nftLength = nftArray.length;
+        nftId = new uint256[](nftLength);
+        flags = new bool[](nftLength);
+        nftName = new string[](nftLength);
+        for (uint256 i = 0; i < nftLength; ++i) {
          
-            gameId[i] = i + 1;
-            string memory m = gameArray[i].gameName;
-            gameName[i] = m;
-            flags[i] = gameArray[i].state;
+            nftId[i] = i + 1;
+            string memory m = nftArray[i].nftName;
+            nftName[i] = m;
+            flags[i] = nftArray[i].state;
         }
     }
 
-    function getGameCount() public view returns(uint256) {
-        return gameArray.length;
+    function getNFTCount() public view returns(uint256) {
+        return nftArray.length;
     }
     
 
-    function getGame(uint256 _gameId) public view returns(string memory gameName, bool state) {
-        uint256 length = gameArray.length;
-        require(_gameId - 1 < length && _gameId > 0, "");
-        gameName = gameIdToGame[_gameId].gameName;
-        state = gameIdToGame[_gameId].state;
+    function getNFT(uint256 _nftId) public view returns(string memory nftName, bool state) {
+        uint256 length = nftArray.length;
+        require(_nftId - 1 < length && _nftId > 0, "");
+        nftName = nftIdToNFT[_nftId].nftName;
+        state = nftIdToNFT[_nftId].state;
     }
 
-    function isEnableGame(uint256 _gameId) public view returns(bool flag) {
-        uint256 length = gameArray.length;
-        require(_gameId - 1 < length && _gameId > 0, "");
-        flag = gameIdToGame[_gameId].state;
+    function isEnableNFT(uint256 _nftId) public view returns(bool flag) {
+        uint256 length = nftArray.length;
+        require(_nftId - 1 < length && _nftId > 0, "");
+        flag = nftIdToNFT[_nftId].state;
     }
 
-    function setExtData(uint256 _gameId, uint256 _tokenId, uint256 _index, string memory _extData) 
+    function setExtData(uint256 _nftId, uint256 _tokenId, uint256 _index, string memory _extData)
     public 
     whenNotPaused 
     isValidToken(_tokenId) 
-    isValidGameId(_gameId)
+    isValidNFTId(_nftId)
     {
         // require(bytes(_extData).length > 0,"");
         // require(bytes(_extData).length <= 32,"");
-        uint256 gameAttrLength = gameIdToTokenAttr[_gameId][_tokenId].length;
+        uint256 nftAttrLength = nftIdToTokenAttr[_nftId][_tokenId].length;
         string[] memory attrs;
-        Game storage game = gameArray[_gameId - 1];
-        require(game.extAttrCount > 0,"");
-        require(_index < game.extAttrCount,"");
-        if(gameAttrLength == 0){
-            attrs = new string[](game.extAttrCount);
+        NFT storage nft = nftArray[_nftId - 1];
+        require(nft.extAttrCount > 0,"");
+        require(_index < nft.extAttrCount,"");
+        if(nftAttrLength == 0){
+            attrs = new string[](nft.extAttrCount);
            
         }else{
-            attrs = gameIdToTokenAttr[_gameId][_tokenId];
+            attrs = nftIdToTokenAttr[_nftId][_tokenId];
            
         }
         attrs[_index] = _extData;
-        gameIdToTokenAttr[_gameId][_tokenId] = attrs;
-        emit ChangeTokenExtAttr(msg.sender,_gameId,_tokenId,_index, _extData);
+        nftIdToTokenAttr[_nftId][_tokenId] = attrs;
+        emit ChangeTokenExtAttr(msg.sender,_nftId,_tokenId,_index, _extData);
     } 
 
-    function setExtData(uint256 _gameId, uint256 _tokenId, string[] memory _extDataArray) 
+    function setExtData(uint256 _nftId, uint256 _tokenId, string[] memory _extDataArray)
     public 
     whenNotPaused 
     isValidToken(_tokenId) 
-    isValidGameId(_gameId)
+    isValidNFTId(_nftId)
     {
-        Game storage game = gameArray[_gameId - 1];
-        require(game.extAttrCount > 0,"");
+        NFT storage nft = nftArray[_nftId - 1];
+        require(nft.extAttrCount > 0,"");
         require(_extDataArray.length > 0,"");
-        require(_extDataArray.length <= game.extAttrCount, "");
+        require(_extDataArray.length <= nft.extAttrCount, "");
 
         // require(bytes(_extData).length > 0,"");
         // require(bytes(_extData).length <= 32,"");
-        uint256 gameAttrLength = gameIdToTokenAttr[_gameId][_tokenId].length;
+        uint256 nftAttrLength = nftIdToTokenAttr[_nftId][_tokenId].length;
         string[] memory attrs;
         
-        if(gameAttrLength == 0){
-            attrs = new string[](game.extAttrCount);
+        if(nftAttrLength == 0){
+            attrs = new string[](nft.extAttrCount);
            
         }else{
-            if( gameAttrLength < game.extAttrCount )
+            if( nftAttrLength < nft.extAttrCount )
             {
-                gameIdToTokenAttr[_gameId][_tokenId].length = game.extAttrCount;
+                nftIdToTokenAttr[_nftId][_tokenId].length = nft.extAttrCount;
             }
-            attrs = gameIdToTokenAttr[_gameId][_tokenId]; 
+            attrs = nftIdToTokenAttr[_nftId][_tokenId];
         }
         for(uint256 i = 0; i < _extDataArray.length; ++i){
             attrs[i] = _extDataArray[i];
         }
         
-        gameIdToTokenAttr[_gameId][_tokenId] = attrs;
-        emit ChangeTokenExtAttrs(msg.sender,_gameId,_tokenId,_extDataArray);
+        nftIdToTokenAttr[_nftId][_tokenId] = attrs;
+        emit ChangeTokenExtAttrs(msg.sender,_nftId,_tokenId,_extDataArray);
     } 
 
-    function getExtData(uint256 _gameId, uint256 _tokenId, uint256 _index) public view  returns(string memory tokenAttr)
+    function getExtData(uint256 _nftId, uint256 _tokenId, uint256 _index) public view  returns(string memory tokenAttr)
     {
-        return gameIdToTokenAttr[_gameId][_tokenId][_index];
+        return nftIdToTokenAttr[_nftId][_tokenId][_index];
     }
  
-    function getExtDatas(uint256 _gameId, uint256 _tokenId) public view isValidToken(_tokenId) isValidGameId(_gameId) returns(string[] memory attrs) {
-        Game storage game = gameArray[_gameId - 1];
-        require(game.extAttrCount > 0,"");
-        attrs = new string[](game.extAttrCount);
-        for (uint256 i = 0; i < game.extAttrCount; ++i) {
-            string memory m = gameIdToTokenAttr[_gameId][_tokenId][i];
+    function getExtDatas(uint256 _nftId, uint256 _tokenId) public view isValidToken(_tokenId) isValidNFTId(_nftId) returns(string[] memory attrs) {
+        NFT storage nft = nftArray[_nftId - 1];
+        require(nft.extAttrCount > 0,"");
+        attrs = new string[](nft.extAttrCount);
+        for (uint256 i = 0; i < nft.extAttrCount; ++i) {
+            string memory m = nftIdToTokenAttr[_nftId][_tokenId][i];
             attrs[i] = m;
         }
     }
-    
 }
