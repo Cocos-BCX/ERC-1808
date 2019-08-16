@@ -31,6 +31,7 @@ A non-homogeneous digital assets standard, and the multiverse system.
     It is a combination of non-homologous tokens (CNFT, Composable NFTs) defined in Ethereum's smart contracts proposed by Matt Lockyer.   
       
     ![P3](https://github.com/Cocos-BCX/1808/blob/master/readmeimg/3_en.png)
+        
     
   The figure shows the comparison of the above three non-homogeneous asset standards with COCOS 1808, which briefly compares the essentials that may be involved in blockchain and gaming. The differences marked in red are the features of the 1808 Standard designed by Cocos-BCX for the game running on-chain. These features are related to the data structure design of the 1808 standard assets in addition to the characteristics of the BCX chain network itself.  
   
