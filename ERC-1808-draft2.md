@@ -152,6 +152,22 @@ interface IRCNFT {
 
 ## Rationale
 
+**NFT Identifiers**
+
+Every NFT is identified by a struct of `string` nftName, `uint256` extAttrCount and `bool` state; inside the ERC-1808 smart contract.
+
+**management mechanism**
+
+In order to organize different games under the same world view, we have established a simple management mechanism.
+
+ERC-1808 standardizes a add function `addNFT`; a logic delete function `setNFTState`; some inquiry function `getNFTs`, `getNFTCount`, `getNFT`; and a option function  isEnableNFT. 
+
+**NFT data sharing mechanism**  
+
+The game prop itself is a non-homogeneous digital asset whose characteristic data should remain unchanged. The process of proposing "traversing" the world line is the process of applying and changing a non-homogeneous digital asset in different games, business, and business under the same world view; it will inevitably involve data sharing and data update issues. We share other data by setting additional data for the current game.
+
+ERC1808 standardizes a set of extra data functions `setExtData`, and the gets the extra data function `getExtData` or `getExtDatas`.
+
 ## Backwards Compatibility
 
 An implementation contracts must implement the ERC1808 interface.
