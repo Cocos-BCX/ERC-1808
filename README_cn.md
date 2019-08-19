@@ -2,7 +2,7 @@
 
 # Cocos-BCX 1808 概述
 完整性规范: https://github.com/ethereum/EIPs/issues/2246  
-[COCOS 1808 非同质数字资产标准和世界观系统](https://github.com/Cocos-BCX/1808/blob/master/README.md)
+开发文档:[COCOS 1808 非同质数字资产标准和世界观系统](https://github.com/Cocos-BCX/1808/blob/master/README.md)
 
 # ERC-1808
 ERC全称Ethereum Request for Comments，即以太坊开发者提交的协议提案，ERC后面的数字是提案编号。

@@ -2,7 +2,7 @@
 
 # ERC-1808
 Full spec: https://github.com/ethereum/EIPs/issues/2246  
-[1808 Standard & Multiverse System](https://github.com/Cocos-BCX/1808/blob/master/README.md)
+develop document: [1808 Standard & Multiverse System](https://github.com/Cocos-BCX/1808/blob/master/README.md)
 
 # ERC-1808
 ERC (Ethereum Request for Comments) is a proposal submitted by the Ethereum developer, and the number after it is the proposal number.
