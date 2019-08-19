@@ -1,6 +1,7 @@
 [中文](https://github.com/Cocos-BCX/ERC-1808/blob/master/README_cn.md)
 
 # ERC-1808
+Full spec: https://github.com/ethereum/EIPs/issues/2246  
 [1808 Standard & Multiverse System](https://github.com/Cocos-BCX/1808/blob/master/README.md)
 
 # ERC-1808
