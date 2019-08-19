@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 pragma experimental ABIEncoderV2; 
 
-contract MyERC1808 {
+contract MyNFT {
     function getAuthorized(uint256 _tokenId) external view returns (address);
     function isAuthorizedForAll(address _owner, address _operator) external view returns (bool);
     function ownerOf(uint256 _tokenId) external view returns (address);
@@ -13,31 +13,31 @@ contract MyERC1808 {
 
 contract AccessAdmin1 {
      
-    address public myERC1808Addr = 0x74b3926AA4D22247540e5578D15BF221ADdf8B44;
-    MyERC1808 myERC1808 = MyERC1808(myERC1808Addr);
+    address public mynftAddr = 0x74b3926AA4D22247540e5578D15BF221ADdf8B44;
+    MyNFT myNFT = MyNFT(mynftAddr);
    
     modifier onlyBusinessAdmin() {
-        require(myERC1808.getBusinessAdmin(msg.sender), "不是业务管理员");
+        require(myNFT.getBusinessAdmin(msg.sender), "不是业务管理员");
         _;
     }
     modifier whenNotPaused() {
-        require(!myERC1808.isPaused(), "合约已经冻结");
+        require(!myNFT.isPaused(), "合约已经冻结");
         _;
     }
 
     modifier whenPaused() {
-        require(myERC1808.isPaused(), "合约没有冻结");
+        require(myNFT.isPaused(), "合约没有冻结");
         _;
     }
     
     modifier isValidToken(uint256 _tokenId) {
-        require(_tokenId >= 1 && _tokenId <= myERC1808.getFashionArrayLength(), "");
-        require(myERC1808.ownerOf(_tokenId) != address(0), "");
+        require(_tokenId >= 1 && _tokenId <= myNFT.getFashionArrayLength(), "");
+        require(myNFT.ownerOf(_tokenId) != address(0), "");
         _;
     }
 }
 
-contract MyNFTData1 is AccessAdmin1, IRCNFT {
+contract MyNFTData1 is AccessAdmin1, ERC1808 {
 
     struct NFT {
         string nftName;

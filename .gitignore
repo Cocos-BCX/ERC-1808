@@ -1,0 +1,18 @@
+# IDE
+.vscode
+.idea
+
+# dependencies
+node_modules
+
+# logs
+npm-debug.log
+yarn-error.log
+yarn.lock
+
+# Backpack build
+build
+release
+
+# pack
+package-lock.json
